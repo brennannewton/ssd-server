@@ -1,8 +1,5 @@
 # Express API template
 
-# initialize the project folder as a git repository
-git init
-
 [![Build Status](https://travis-ci.com/brennannewton/ssd-server.svg?branch=master)](https://travis-ci.com/brennannewton/ssd-server)
 
 [![Coverage Status](https://coveralls.io/repos/github/brennannewton/ssd-server/badge.svg?branch=master)](https://coveralls.io/github/brennannewton/ssd-server?branch=master)
@@ -14,3 +11,10 @@ git init
 [![Build status](https://ci.appveyor.com/api/projects/status/p50axla6f4ivlxpt?svg=true)](https://ci.appveyor.com/project/brennannewton/ssd-server)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/p50axla6f4ivlxpt/branch/master?svg=true)](https://ci.appveyor.com/project/brennannewton/ssd-server/branch/master)
+
+## How to run the app
+1. Clone the repo
+2. Open a terminal in the project root and run `yarn startdev`
+
+## How to test
+1. Run `yarn test`
