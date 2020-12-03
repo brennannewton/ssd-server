@@ -10,8 +10,6 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/p50axla6f4ivlxpt?svg=true)](https://ci.appveyor.com/project/brennannewton/ssd-server)
 
-[![Build status](https://ci.appveyor.com/api/projects/status/p50axla6f4ivlxpt/branch/master?svg=true)](https://ci.appveyor.com/project/brennannewton/ssd-server/branch/master)
-
 ## How to run the app
 1. Clone the repo
 2. Open a terminal in the project root and run `yarn startdev`
