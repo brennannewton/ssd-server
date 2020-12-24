@@ -1,32 +1,39 @@
 language: node_js
 env:
   global:
-    - CC_TEST_REPORTER_ID=b9a2b6453272523c5aedb7f0101da3a54f11459e794a5183e3c7c5f5eb9f3861
+  - CC_TEST_REPORTER_ID=b9a2b6453272523c5aedb7f0101da3a54f11459e794a5183e3c7c5f5eb9f3861
 matrix:
   include:
   - node_js: '12'
 cache:
-  directories: [node_modules]
-install:
-  yarn
+  directories:
+  - node_modules
+install: yarn
 after_success: yarn coverage
 before_script:
-  - psql -c 'create database testdb;' -U postgres
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
+- psql -c 'create database testdb;' -U postgres
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+  > ./cc-test-reporter
+- chmod +x ./cc-test-reporter
+- "./cc-test-reporter before-build"
 script:
-  - yarn test
+- yarn test
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+- "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
 services:
-  - postgresql
+- postgresql
 addons:
-  postgresql: "10"
+  postgresql: '10'
   apt:
     packages:
     - postgresql-10
     - postgresql-client-10
 before_install:
-  - sudo cp /etc/postgresql/{9.6,10}/main/pg_hba.conf
-  - sudo /etc/init.d/postgresql restart
+- sudo cp /etc/postgresql/{9.6,10}/main/pg_hba.conf
+- sudo /etc/init.d/postgresql restart
+deploy:
+  provider: heroku
+  app:
+    master: ssd-server
+  api_key:
+    secure: rdSy13zeobVke0Gkl4GBIJtWF8NdpNnI444DIrmuuccF7ARu5xVFlsmZDuLOXMrWSMNrEiXvm5Xkkk8Jc5dXL5Kx1CztSkvlb+Sxy0/rNRnlmckYKjyW4hEO4nopsGAhNzwP20u+aRumT+BzZvDiUIdwpUkpakNsZaGXvvNnaPdHCh1lGX4t0Z8obBgkMOTRCPO45tNy0alZzIqBtxZOfUB6ov2xWm4/nsqcY6EUzD+8PSls0eBmHd+ucH2vnSfRoQYakgGXLgq80Q3Gvr81ADxj03mcvmgVSOsZ1fd8OvX2YsKKwq8z8sGzSYmwWWoCp7BHHK/IfAbcx/rHrqsdhkGc8aD8fM/DmRs3tDnhNwm3csk7X5RWVfbHcloCrWZjYRJRmxlPVDoyTwoyrktpPbKRy1sKTe7y8lkl1AEhMCZYXC8INPIJ6FAk/WWxFGw3WVW/GYgGXy8qU0LE6caVv3Kyq/B0v61PJf1iWZ6vZBCehvj3L6YlpP8A0zUhcfwA8vjZ3dkWoOLtLPUcHtujnhfNHmeaACctYcTa5KjdRUMyDGwO6Du6U0Ppc+ZUMvW8o8FSUloNA2pItnh4h7lvUfGfPFJfdnkLJofcnkqq8MMu5aEupkZnNfXrnuIJ/aKdboISyFg4BZ18FQkQhVH/40Tz/XYBqreep38OkJJqsNU=
